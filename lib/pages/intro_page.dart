@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:footwearhub/pages/home_page.dart';
 
 class IntroPage extends StatelessWidget {
@@ -57,13 +56,13 @@ class IntroPage extends StatelessWidget {
 
               //start now button
               GestureDetector(
-                onTap: () => {
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomePage(),
+                      builder: (context) => const HomePage(),
                     ),
-                  ),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(
