@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../models/shoe.dart';
 
 class ShoeTile extends StatelessWidget {
-  final Shoe shoe; // Mark the shoe field as final
+  final Shoe shoe; // The shoe field must be final
+  final void Function()? onTap; // The onTap must also be final
 
-  const ShoeTile({super.key, required this.shoe});
+  // Constructor should initialize both fields and ensure onTap is properly assigned
+  const ShoeTile({super.key, required this.shoe, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +20,22 @@ class ShoeTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          //shoe pic
+          // Shoe image
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(shoe.imagePath),
           ),
 
-          //description
-          Text(
-            shoe.description,
-            style: TextStyle(color: Colors.grey[600]),
+          // Shoe description
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(
+              shoe.description,
+              style: TextStyle(color: Colors.grey[600]),
+            ),
           ),
 
-          //price + details
+          // Shoe name and price
           Padding(
             padding: const EdgeInsets.only(left: 25.0),
             child: Row(
@@ -41,7 +45,7 @@ class ShoeTile extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //shoe name
+                    // Shoe name
                     Text(
                       shoe.name,
                       style: const TextStyle(
@@ -50,39 +54,37 @@ class ShoeTile extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
 
-                    //shoe price
+                    // Shoe price
                     Text(
                       '\$${shoe.price}',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                      ),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),
-                //plus button
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
+
+                // Plus button for adding to cart
+                GestureDetector(
+                  onTap: onTap, // Use the onTap callback here
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
                     ),
-                  ),
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-
-          //button to add to cart (can be added here)
         ],
       ),
     );
