@@ -7,6 +7,6 @@ class Shoe {
   Shoe(
       {required this.name,
       required this.price,
-      required this.imagePath,
-      required this.description});
+      required this.description,
+      required this.imagePath});
 }

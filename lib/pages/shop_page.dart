@@ -73,16 +73,28 @@ class ShopPage extends StatelessWidget {
         ),
 
         Expanded(
-          child: ListView.builder(itemBuilder: (context, index) {
-            Shoe shoe = Shoe(
+          child: ListView.builder(
+            itemCount: 4,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              Shoe shoe = Shoe(
                 name: 'Air Jordan',
                 price: '240',
-                imagePath: '/images/air jordan.png',
-                description: 'cool shoe');
-            return ShoeTile(
-              shoe: shoe,
-            );
-          }),
+                description: 'cool shoe',
+                imagePath: '/images/air-jordan.png',
+              );
+              return ShoeTile(
+                shoe: shoe,
+              );
+            },
+          ),
+        ),
+
+        const Padding(
+          padding: EdgeInsets.only(top: 25.0, left: 25, right: 25),
+          child: Divider(
+            color: Colors.white,
+          ),
         )
       ],
     );
